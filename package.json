@@ -1,22 +1,51 @@
 {
-  "name": "mark-d-bot",
+  "name": "john-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Um bot de utilidades para servidores no Discord",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node out/index.js",
+    "dev": "nodemon ./src/index.js",
+    "dev:start": "sucrase-node ./src/index.js",
+    "build": "sucrase ./src -d ./out --transforms imports",
+    "lint": "eslint --fix .",
+    "commit": "cz"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Pedro Henrique <pedroca21265@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
     "sucrase": "^3.16.0"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "3.3.0",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": ">=4",
+    "lint-staged": ">=10",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

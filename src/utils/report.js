@@ -1,18 +1,28 @@
+/* eslint no-console: 0 */
+/* eslint no-shadow: 0 */
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 
 export function getReports(type = '') {
-  const report = require('./report.json')
-  return type !== '' && typeof type === 'string' ? (report[type] || null) : report
+  try {
+    const reportFile = readFileSync(join(__dirname, 'report.json'))
+    const report = JSON.parse(reportFile)
+    return type !== '' && typeof type === 'string'
+      ? report[type] || null
+      : report
+  } catch (error) {
+    console.error('[report]', error)
+    return null
+  }
 }
 
 export function addReport(type, newReport) {
   try {
-    var reportFile = readFileSync(join(__dirname, 'report.json'))
+    let reportFile = readFileSync(join(__dirname, 'report.json'))
     const report = JSON.parse(reportFile)
     report[type] = report[type] || []
     report[type].push(newReport)
-    var reportFile = JSON.stringify(report, null, 2)
+    reportFile = JSON.stringify(report, null, 2)
     writeFileSync(join(__dirname, 'report.json'), reportFile)
     return report[type] || null
   } catch (error) {
