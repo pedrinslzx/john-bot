@@ -1,0 +1,2 @@
+run="yarn sucrase-node index.js"
+language="nodejs"

@@ -1,0 +1,28 @@
+{
+  "command": [],
+  "message-error": [],
+  "ping": [
+    {
+      "requester": {
+        "id": "700327812950786048",
+        "username": "Pedrinho",
+        "tag": "Pedrinho#0480",
+        "isBot": false
+      },
+      "value": -828,
+      "required_in": "Tue, 29 Dec 2020 20:39:52 GMT",
+      "ended_in": "Tue, 29 Dec 2020 20:39:53 GMT"
+    },
+    {
+      "requester": {
+        "id": "700327812950786048",
+        "username": "Pedrinho",
+        "tag": "Pedrinho#0480",
+        "isBot": false
+      },
+      "value": 119,
+      "required_in": "Tue, 29 Dec 2020 20:39:59 GMT",
+      "ended_in": "Tue, 29 Dec 2020 20:39:59 GMT"
+    }
+  ]
+}
