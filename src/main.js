@@ -5,16 +5,20 @@ import * as reporter from './utils/report'
 
 const client = new Client()
 
-client.on('ready', () => {
+client.on('ready', async () => {
   const tags = {
     produciton: 'online',
-    development: 'invisible',
+    development: 'dnd',
     beta: 'idle'
   }
-  client.user.setActivity(
-    `Eu tô em ${client.guilds.cache.size} servidores, com ${client.channels.cache.size} canais, junto ${client.users.cache.size} usuarios e ${client.emojis.cache.size} emojis.`
-  )
-  client.user.setStatus(tags[config.tag] || 'idle')
+  await client.user.setPresence({
+    status: tags[config.tag] || 'idle',
+    activity: {
+      name: `${config.prefix}help`,
+      type: 'WATCHING',
+      url: process.env.PUBLIC_URL && process.env.PUBLIC_URL + '/invite'
+    }
+  })
   // eslint-disable-next-line no-console
   console.log(`To logado no discord como ${client.user.tag}`)
 })

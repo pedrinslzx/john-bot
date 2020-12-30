@@ -1,23 +1,20 @@
 import 'dotenv/config'
-import * as http from 'http'
+import express from 'express'
 import axios from 'axios'
 
 import './main'
 
-http
-  .createServer((req, res) => {
-    // console.log(`${req.method.toUpperCase()} ${req.url}`)
-    res.end(
-      JSON.stringify({
-        date: new Date().toLocaleString(),
-        request: {
-          ...req.headers
-        }
-      })
-    )
-    // eslint-disable-next-line no-console
-  })
-  .listen(3000, () => console.log('Tô Ligado na 3000'))
+const server = express()
+
+server.get('/',(req,res)=>{
+  res.redirect(process.env.DISCORD_INVITE_URL)
+})
+
+server.get('/invite',(req,res)=>{
+  res.redirect(process.env.DISCORD_INVITE_URL)
+})
+
+server.listen(3000, () => console.log('Tô Ligado na 3000'))
 
 if (process.env.PUBLIC_DOMAIN) {
   setInterval(() => {

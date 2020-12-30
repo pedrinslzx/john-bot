@@ -1,2 +1,2 @@
-run="yarn sucrase-node index.js"
+run="yarn dev:start"
 language="nodejs"
