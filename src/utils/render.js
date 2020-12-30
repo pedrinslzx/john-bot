@@ -17,3 +17,13 @@ export function renderThis(string = '', self = {}) {
   })
   return newString.join('')
 }
+
+
+export function arrayToObject(array = ['']){
+  return array.reduce((obj, value)=>{
+    if(typeof value !== 'function' && typeof value !== 'object' && typeof value !== 'null' && typeof value !== 'undefined'){
+      obj[value] = value
+    }
+    return obj
+  }, {})
+}
