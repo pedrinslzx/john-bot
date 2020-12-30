@@ -7,7 +7,7 @@ const client = new Client()
 
 client.on('ready', async () => {
   const tags = {
-    produciton: 'online',
+    production: 'online',
     development: 'dnd',
     beta: 'idle'
   }
