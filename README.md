@@ -153,6 +153,6 @@ $ yarn start
 
 ## Licença
 
-Este projeto esta sobe a licença [MIT](./LICENSE).
+Este projeto esta sobe a licença [Mozilla Public License 2.0](./LICENSE).
 
 Feito com ❤️ por Pedro Henrique 👋🏽 [Entre em contato!](https://discordapp.com/users/700327812950786048)
