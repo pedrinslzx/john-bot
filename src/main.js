@@ -1,9 +1,9 @@
-import { Client } from 'discord.js'
+import { Bot } from './classes'
 import config from './config'
 import commands from './commands'
 import * as reporter from './utils/report'
 
-const client = new Client()
+const client = new Bot()
 
 client.on('ready', async () => {
   const tags = {
