@@ -1,18 +1,16 @@
 <div align="center">
   <h1 id="title">John Bot</h1>
-  
-  <div>
-	<a href="https://www.travis-ci.com/github/pedrinholemes/john-bot/branches"><img alt="Travis Build" src="https://img.shields.io/travis/com/pedrinholemes/john-bot/master?style=flat-square"></a>
-    <a href="https://github.com/pedrinholemes/john-bot/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/pedrinholemes/john-bot?style=flat-square"></a>
-	<a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub top language" src="https://img.shields.io/github/languages/top/pedrinholemes/john-bot?style=flat-square"></a>
-	<a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/pedrinholemes/john-bot?style=flat-square"></a>
-	<a href="https://github.com/pedrinholemes/john-bot/releases"><img alt="GitHub latest release" src="https://img.shields.io/github/v/release/pedrinholemes/john-bot?include_prereleases&style=flat-square"></a>
-	<a href="https://discord.js.org/"><img alt="Lib" src="https://img.shields.io/badge/lib-Discord.JS-blue?style=flat-square"></a>
-	<a href="https://john-bot.pedrinholemes.repl.co/invite"><img alt="Bot Status" src="https://img.shields.io/website?down_color=red&down_message=offline&style=flat-square&up_color=blue&up_message=online&url=https%3A%2F%2Fjohn-bot.pedrinholemes.repl.co%2F&label=bot%20status"></a>
-	<a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub license" src="https://img.shields.io/github/license/pedrinholemes/john-bot?style=flat-square"></a>
-	<a href="https://discord.com/invite/ynP3CdMx"><img alt="Support Server" src="https://img.shields.io/badge/dynamic/json?label=Support&query=$.name&url=https%3A%2F%2Fdiscord.com%2Fapi%2Fguilds%2F793638053729533972%2Fwidget.json&style=flat-square&logo=discord&logoColor=white"></a>
+  <div align="center">
+    <a href="https://www.travis-ci.com/github/pedrinholemes/john-bot/branches"><img alt="Travis Build" src="https://img.shields.io/travis/com/pedrinholemes/john-bot/master?style=flat-square"></a>&nbsp;
+    <a href="https://github.com/pedrinholemes/john-bot/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/pedrinholemes/john-bot?style=flat-square"></a>&nbsp;
+	  <a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub top language" src="https://img.shields.io/github/languages/top/pedrinholemes/john-bot?style=flat-square"></a>&nbsp;
+  	<a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/pedrinholemes/john-bot?style=flat-square"></a>&nbsp;
+  	<a href="https://github.com/pedrinholemes/john-bot/releases"><img alt="GitHub latest release" src="https://img.shields.io/github/v/release/pedrinholemes/john-bot?include_prereleases&style=flat-square"></a>&nbsp;
+	  <a href="https://discord.js.org/"><img alt="Lib" src="https://img.shields.io/badge/lib-Discord.JS-blue?style=flat-square"></a>&nbsp;
+  	<a href="https://john-bot.pedrinholemes.repl.co/invite"><img alt="Bot Status" src="https://img.shields.io/website?down_color=red&down_message=offline&style=flat-square&up_color=blue&up_message=online&url=https%3A%2F%2Fjohn-bot.pedrinholemes.repl.co%2F&label=bot%20status"></a>&nbsp;
+  	<a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub license" src="https://img.shields.io/github/license/pedrinholemes/john-bot?style=flat-square"></a>&nbsp;
+  	<a href="#suporte"><img alt="Support Server" src="https://img.shields.io/badge/dynamic/json?label=Support&query=$.name&url=https%3A%2F%2Fdiscord.com%2Fapi%2Fguilds%2F793638053729533972%2Fwidget.json&style=flat-square&logo=discord&logoColor=white"></a>
   </div>
-
   <p align="center">Um bot de utilidades para seu servidor no Discord </p>
 </div>
 
@@ -25,14 +23,13 @@
 	<a href="#objetivo">Objetivo</a> • 
 	<a href="#roadmap">Roadmap</a> • 
 	<a href="#tecnologias">Tecnologias</a> • 
-	<a href="#contribuição">Contribuição</a> • 
-	<a href="#Instalação">Instalação</a> • 
+	<a href="#contribuicao">Contribuição</a> • 
+	<a href="#Instalacao">Instalação</a> •  
+	<a href="#suporte">Suporte</a> •
 	<a href="#licença">Licença</a>
 </p>
 
-### Objetivo 
-
-### Roadmap
+<h3 id="roadmap">Roadmap</h3>
 
 - Comandos
   - [x] Help
@@ -55,7 +52,7 @@
     - [ ] Mute
     - [ ] Unmute
 
-### Tecnologias
+<h3 id="tecnologias">Tecnologias</h3>
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
@@ -68,16 +65,16 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <!-- - [@discordjs/opus](https://github.com/discordjs/opus#readme) -->
 <!-- - [TypeScript](https://www.typescriptlang.org/) -->
 
-## Instalação
+<h2 id="instalacao">Instalação</h2>
 
-### Pré-requisitos
+<h3 id="pre-requisitos">Pré-requisitos</h3>
 
-#### Ferramentas
+<h3 id="ferramentas">Ferramentas</h3>
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [**Git**](https://git-scm.com), [**Node.js**](https://nodejs.org/pt-br/), [**Yarn**](https://yarnpkg.com/). Além disto é bom ter um editor para trabalhar com o código como [**VSCode**](https://code.visualstudio.com/).
 
-#### Tokens
+<h4 id="tokens">Tokens</h4>
 
 Você tambem precisará de um token para o seu bot. Para conseguir um token, entre no [Portal do Desenvolvedor](https://discord.com/developers/applications) no site oficial do Discord, selecione uma **aplicação** - _se nessesário crie uma clicando no botão **New Application**_ - então clique em **Bot**, se nessesário clique em **Add Bot** e confirme que deseja criar um Bot em **Yes, do it!**.
 
@@ -87,7 +84,7 @@ Depois que seu bot foi criado, clique em **Copy** para copiar o token do seu Bot
 
 <p style="color: red; font-weight: 600;">⚠️ O token é particular de cada Bot, com ele é possivel logar como seu Bot utilizando libs de conexão com a Discord Bot API, sendo ela via JDA no Java, discord.py no Python, Discord.JS no JavaScript ou Typescript, entre outras. Se por um acaso você vazou ele, clique em <b>Regenerate</b> para gerar outro token e em <b>Copy</b> para copia-lo. ⚠️</p>
 
-### Iniciando o seu Bot
+<h3 id="iniciando-o-seu-bot">Iniciando o seu Bot</h3>
 
 ```bash
 # Clone este repositório
@@ -129,13 +126,17 @@ $ yarn start
 <!-- [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) -->
 <!-- ALL-CONTRIBUTORS-BADGE:END --> 
 
-## Como contribuir para o projeto
+<h2 id="como-contribuir-para-o-projeto">Como contribuir para o projeto</h2>
 
 1. Faça um **fork** do projeto.
 2. Crie uma nova branch com as suas alterações: `git checkout -b my-feature`
 3. Salve as alterações e crie uma mensagem de commit contando o que você fez: `git commit -m "feature: My new feature"`
 4. Envie as suas alterações: `git push origin my-feature`
-> Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](./CONTRIBUTING.md)
+<!-- > Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](./CONTRIBUTING.md) -->
+
+<h2 id="suporte">Suporte</h2>
+
+Entre em nosso servidor de suporte: [&nbsp;John Bot Server&nbsp;](https://discord.gg/7T44HpVVxK) 
 
 ## Autor
 
