@@ -1,4 +1,4 @@
-import {arrayToObject} from './utils/render'
+import { arrayToObject } from './utils/render'
 
 export default {
   tag: process.env.APP_MODE || 'dev',
