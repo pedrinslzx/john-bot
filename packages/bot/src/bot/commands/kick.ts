@@ -1,17 +1,14 @@
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { Command } from '.'
 
-export default {
-  name: 'kick',
-  description: 'Dá kick no usuario mencionado',
-  examples: [
-    'kick',
-    'kick <@!$=client.user.id$>',
-    'kick @$=client.user.username$'
-  ],
-  handler: async function Handler(message) {
+const KickCommand = new Command(
+  'kick',
+  'Dá kick no usuario mencionado',
+  [],
+  async (bot, message, args) => {
     const author = message.guild.member(message.author)
-    const me = message.guild.member(this.client.user)
+    const me = message.guild.member(bot.client.user)
 
     if (author.permissions.has(['KICK_MEMBERS'])) {
       if (me.permissions.has(['KICK_MEMBERS'])) {
@@ -21,7 +18,7 @@ export default {
           if (member) {
             member
               .kick(
-                `${user.tag} foi kickado por ${author.tag} em ${format(
+                `${user.tag} foi kickado por ${message.author.tag} em ${format(
                   new Date(),
                   'PP às pp',
                   {
@@ -54,4 +51,6 @@ export default {
       message.reply('eu sei que tu não pode fazer isso :)')
     }
   }
-}
+)
+
+export default KickCommand

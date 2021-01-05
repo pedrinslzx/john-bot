@@ -51,7 +51,8 @@
     - [ ] Unban
     - [ ] Mute
     - [ ] Unmute
-
+    
+    
 <h3 id="tecnologias">Tecnologias</h3>
 
 As seguintes ferramentas foram usadas na construção do projeto:
@@ -65,6 +66,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <!-- - [@discordjs/opus](https://github.com/discordjs/opus#readme) -->
 <!-- - [TypeScript](https://www.typescriptlang.org/) -->
 
+
 <h2 id="instalacao">Instalação</h2>
 
 <h3 id="pre-requisitos">Pré-requisitos</h3>
@@ -73,6 +75,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [**Git**](https://git-scm.com), [**Node.js**](https://nodejs.org/pt-br/), [**Yarn**](https://yarnpkg.com/). Além disto é bom ter um editor para trabalhar com o código como [**VSCode**](https://code.visualstudio.com/).
+
 
 <h4 id="tokens">Tokens</h4>
 
@@ -83,6 +86,7 @@ Você tambem precisará de um token para o seu bot. Para conseguir um token, ent
 Depois que seu bot foi criado, clique em **Copy** para copiar o token do seu Bot.
 
 <p style="color: red; font-weight: 600;">⚠️ O token é particular de cada Bot, com ele é possivel logar como seu Bot utilizando libs de conexão com a Discord Bot API, sendo ela via JDA no Java, discord.py no Python, Discord.JS no JavaScript ou Typescript, entre outras. Se por um acaso você vazou ele, clique em <b>Regenerate</b> para gerar outro token e em <b>Copy</b> para copia-lo. ⚠️</p>
+
 
 <h3 id="iniciando-o-seu-bot">Iniciando o seu Bot</h3>
 
