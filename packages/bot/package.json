@@ -12,7 +12,6 @@
   "author": "Pedro Henrique <pedroca21265@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@discord-bot/utils": "*",
     "@discordjs/opus": "^0.3.3",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",

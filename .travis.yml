@@ -1,9 +1,10 @@
 language: node_js
 node_js:
   - lts/*
-  
+
 install:
   - yarn install
 
-script: 
-  - yarn build
+script:
+  - yarn workspace @discord-bot/bot build
+  - yarn workspace @discord-bot/api build

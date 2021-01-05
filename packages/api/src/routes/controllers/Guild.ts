@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express'
-import Guild from '../../database/schemas/Guild'
+import Guild from '../../schemas/Guild'
 
 class GuildController {
   public router = Router()
