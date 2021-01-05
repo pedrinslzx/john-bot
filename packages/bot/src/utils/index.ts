@@ -2,15 +2,15 @@ interface EmptyObject {
   [key: string]: string | number | EmptyObject
 }
 
-export function getProp(obj: string | number | EmptyObject, names: string) {
+export function getProp<T = any>(obj: EmptyObject, names: string): T {
   const [name, ...otherNames] = names.split('.')
-  const value = obj[name]
+  const value: any | T = obj[name]
   // eslint-disable-next-line no-use-before-define
   if (otherNames.length && value) return getProp(value, otherNames.join('.'))
   return value
 }
 
-export function renderThis(string: string, self: EmptyObject) {
+export function renderThis(string: string, self: EmptyObject): string {
   const split = string.split('$')
   const newString = split.map(name => {
     if (name.startsWith('=')) {
@@ -22,7 +22,7 @@ export function renderThis(string: string, self: EmptyObject) {
   return newString.join('')
 }
 
-export function arrayToObject(array: string[]) {
+export function arrayToObject(array: string[]): EmptyObject {
   return array.reduce((obj, value) => {
     if (
       typeof value !== 'function' &&
@@ -34,4 +34,10 @@ export function arrayToObject(array: string[]) {
     }
     return obj
   }, {} as EmptyObject)
+}
+export function getInviteBotURL(
+  clientID: string,
+  permissions: number | string = 8
+): string {
+  return `https://discordapp.com/oauth2/authorize/?permissions=${permissions}&scope=bot&client_id=${clientID}`
 }

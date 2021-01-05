@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "name": "bot",
+      "path": "../packages/bot"
+    },
+    {
+      "name": "discord-bot",
+      "path": ".."
+    },
+    {
+      "name": "api",
+      "path": "../packages/api"
+    }
+  ],
+  "settings": {}
+}

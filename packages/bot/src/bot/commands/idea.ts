@@ -6,7 +6,7 @@ const IdeiaCommand = new Command(
   'Escreva sua ideia',
   ['sugest', 'sugestao'],
   async (bot, message, args) => {
-    message.delete()
+    await message.delete()
     const content = args.join(' ')
 
     if (!args[0]) {
@@ -18,10 +18,10 @@ const IdeiaCommand = new Command(
         `${message.author.username}, forneça uma sugestão de no máximo 1000 caractetes.`
       )
     } else {
-      const canal = message.guild.channels.cache.find(
-        ch => ch.id === '699780010235527278'
+      const canal = bot.client.channels?.cache.find(
+        ch => ch.id === '742191895010082850'
       )
-      const msg = await (canal as any).send(
+      const msg = await (canal as any)?.send(
         new Discord.MessageEmbed()
           .setColor('#FFFFF1')
           .addField('Autor:', message.author)
@@ -33,7 +33,7 @@ const IdeiaCommand = new Command(
         `${message.author} a mensagem foi enviada com sucesso!`
       )
 
-      await Promise.all(['✔️', '❎'].map(emoji => msg.react(emoji)))
+      await Promise.all(['✔️', '❎'].map(emoji => msg?.react(emoji)))
     }
   }
 )
