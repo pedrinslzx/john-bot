@@ -7,7 +7,7 @@
     "start": "node out/index.js",
     "dev": "nodemon ./src/index.ts",
     "dev:start": "sucrase-node ./src/index.ts",
-    "build": "tsc ."
+    "build": "tsc ./src/index.ts/src/index.ts"
   },
   "author": "Pedro Henrique <pedroca21265@gmail.com>",
   "license": "MIT",
