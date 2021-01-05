@@ -1,12 +1,13 @@
 {
   "name": "@discord-bot/api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "out/server.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./out/index.js",
+    "start": "node ./out/server.js",
     "dev": "nodemon ./src/server.ts",
-    "build": "tsc ."
+    "dev:start": "sucrase-node ./src/server.ts",
+    "build": "sucrase ./src -d ./out --transforms typescript,imports"
   },
   "dependencies": {
     "cors": "^2.8.5",

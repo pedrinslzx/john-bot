@@ -1,13 +1,12 @@
 {
   "name": "@discord-bot/bot",
   "version": "1.0.0",
-  "description": "Um bot de utilidades para servidores no Discord",
   "main": "out/index.js",
   "scripts": {
-    "start": "node out/index.js",
+    "start": "node ./out/index.js",
     "dev": "nodemon ./src/index.ts",
     "dev:start": "sucrase-node ./src/index.ts",
-    "build": "tsc ."
+    "build": "sucrase ./src -d ./out --transforms typescript,imports"
   },
   "author": "Pedro Henrique <pedroca21265@gmail.com>",
   "license": "MIT",

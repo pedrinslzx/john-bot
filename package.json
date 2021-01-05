@@ -31,7 +31,7 @@
     }
   },
   "lint-staged": {
-    "*.(j|t)sx?": [
+    "*.(j|t)s": [
       "prettier -w",
       "eslint --fix"
     ]
