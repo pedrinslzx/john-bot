@@ -1,5 +1,6 @@
 .eslintrc.js
 packages/**/*.js
+*.json
 node_modules
 dist
 out

@@ -4,8 +4,7 @@
   "description": "Um bot de utilidades para servidores no Discord",
   "private": true,
   "scripts": {
-    "lint": "eslint --fix .",
-    "commit": "cz"
+    "lint": "eslint --fix ."
   },
   "workspaces": {
     "packages": [
@@ -32,9 +31,9 @@
     }
   },
   "lint-staged": {
-    "*": [
+    "*.(j|t)sx?": [
       "prettier -w",
-      "eslint --cache --fix"
+      "eslint --fix"
     ]
   },
   "config": {
