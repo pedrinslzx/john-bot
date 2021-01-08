@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./out/index.js",
     "dev": "nodemon ./src/index.ts",
-    "dev:start": "sucrase-node ./src/index.ts",
+    "start": "sucrase-node ./src/index.ts",
     "build": "sucrase ./src -d ./out --transforms typescript,imports"
   },
   "author": "Pedro Henrique <pedroca21265@gmail.com>",

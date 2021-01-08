@@ -9,7 +9,8 @@
 	  <a href="https://discord.js.org/"><img alt="Lib" src="https://img.shields.io/badge/lib-Discord.JS-blue?style=flat-square"></a>&nbsp;
   	<a href="https://john-bot.pedrinholemes.repl.co/invite"><img alt="Bot Status" src="https://img.shields.io/website?down_color=red&down_message=offline&style=flat-square&up_color=blue&up_message=online&url=https%3A%2F%2Fjohn-bot.pedrinholemes.repl.co%2F&label=bot%20status"></a>&nbsp;
   	<a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub license" src="https://img.shields.io/github/license/pedrinholemes/john-bot?style=flat-square"></a>&nbsp;
-  	<a href="#suporte"><img alt="Support Server" src="https://img.shields.io/badge/dynamic/json?label=Support&query=$.name&url=https%3A%2F%2Fdiscord.com%2Fapi%2Fguilds%2F793638053729533972%2Fwidget.json&style=flat-square&logo=discord&logoColor=white"></a>
+  	<a href="#suporte"><img alt="Support Server" src="https://img.shields.io/badge/dynamic/json?label=Support&query=$.name&url=https%3A%2F%2Fdiscord.com%2Fapi%2Fguilds%2F793638053729533972%2Fwidget.json&style=flat-square&logo=discord&logoColor=white"></a>&nbsp;
+    <a href="https://john-bot.pedrinholemes.repl.co"><img alt="Uptime Robot ratio (7 days)" src="https://img.shields.io/uptimerobot/ratio/7/m786506436-9fd0e0b245bdc136b88a0a29?style=flat-square"></a>
   </div>
   <p align="center">Um bot de utilidades para seu servidor no Discord </p>
 </div>
@@ -34,6 +35,8 @@
 - Comandos
   - [x] Help
   - [x] Ping
+  - [x] Reply
+  - [x] Ideia
 - Grupos
   - [ ] Musica
     - [ ] Play
@@ -51,8 +54,7 @@
     - [ ] Unban
     - [ ] Mute
     - [ ] Unmute
-    
-    
+
 <h3 id="tecnologias">Tecnologias</h3>
 
 As seguintes ferramentas foram usadas na construção do projeto:
@@ -63,9 +65,8 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [date-fns](http://date-fns.org/)
 - [dotEnv](https://github.com/motdotla/dotenv#readme)
 - [Sucrase](https://sucrase.io/)
-<!-- - [@discordjs/opus](https://github.com/discordjs/opus#readme) -->
-<!-- - [TypeScript](https://www.typescriptlang.org/) -->
-
+  <!-- - [@discordjs/opus](https://github.com/discordjs/opus#readme) -->
+  <!-- - [TypeScript](https://www.typescriptlang.org/) -->
 
 <h2 id="instalacao">Instalação</h2>
 
@@ -76,7 +77,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [**Git**](https://git-scm.com), [**Node.js**](https://nodejs.org/pt-br/), [**Yarn**](https://yarnpkg.com/). Além disto é bom ter um editor para trabalhar com o código como [**VSCode**](https://code.visualstudio.com/).
 
-
 <h4 id="tokens">Tokens</h4>
 
 Você tambem precisará de um token para o seu bot. Para conseguir um token, entre no [Portal do Desenvolvedor](https://discord.com/developers/applications) no site oficial do Discord, selecione uma **aplicação** - _se nessesário crie uma clicando no botão **New Application**_ - então clique em **Bot**, se nessesário clique em **Add Bot** e confirme que deseja criar um Bot em **Yes, do it!**.
@@ -86,7 +86,6 @@ Você tambem precisará de um token para o seu bot. Para conseguir um token, ent
 Depois que seu bot foi criado, clique em **Copy** para copiar o token do seu Bot.
 
 <p style="color: red; font-weight: 600;">⚠️ O token é particular de cada Bot, com ele é possivel logar como seu Bot utilizando libs de conexão com a Discord Bot API, sendo ela via JDA no Java, discord.py no Python, Discord.JS no JavaScript ou Typescript, entre outras. Se por um acaso você vazou ele, clique em <b>Regenerate</b> para gerar outro token e em <b>Copy</b> para copia-lo. ⚠️</p>
-
 
 <h3 id="iniciando-o-seu-bot">Iniciando o seu Bot</h3>
 
@@ -104,7 +103,7 @@ $ cp .env.example .env
 # - Vim
 $ vim .env
 # - VSCode - abra o Vscode na pasta do projeto e edite o `.env`
-$ code . 
+$ code .
 # - NotePad
 $ notepad .env
 # - Nano
@@ -114,7 +113,7 @@ $ nano .env
 $ yarn install
 
 # Execute a aplicação
-# Em modo de desenvolvimento 
+# Em modo de desenvolvimento
 $ yarn dev
 
 # Ou em modo de produção
@@ -128,7 +127,7 @@ $ yarn start
 
 <!-- ALL-CONTRIBUTORS-BADGE:START -->
 <!-- [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors) -->
-<!-- ALL-CONTRIBUTORS-BADGE:END --> 
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <h2 id="como-contribuir-para-o-projeto">Como contribuir para o projeto</h2>
 
@@ -140,7 +139,7 @@ $ yarn start
 
 <h2 id="suporte">Suporte</h2>
 
-Entre em nosso servidor de suporte: [&nbsp;John Bot Server&nbsp;](https://discord.gg/7T44HpVVxK) 
+Entre em nosso servidor de suporte: [&nbsp;John Bot Server&nbsp;](https://discord.gg/7T44HpVVxK)
 
 ## Autor
 
@@ -153,8 +152,8 @@ Entre em nosso servidor de suporte: [&nbsp;John Bot Server&nbsp;](https://discor
 [![Twitter Badge](https://img.shields.io/badge/-@pedrinho_lemes-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/pedrinho_lemes)](https://twitter.com/pedrinho_lemes)
 [![Gmail Badge](https://img.shields.io/badge/-pedroca21265@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:pedroca21265@gmail.com)](mailto:pedroca21265@gmail.com)
 [![Instagram Badge](https://img.shields.io/badge/-@pedrinho.lemes-5851DB?style=flat-square&logo=Instagram&logoColor=white&link=https://www.instagram.com/pedrinho.lemes/)](https://www.instagram.com/pedrinho.lemes/)
-[![Discord Badge](https://img.shields.io/badge/-@pedrinho.lemes-7289DA?style=flat-square&logo=Discord&logoColor=white&link=https://discordapp.com/users/700327812950786048)](https://discordapp.com/users/700327812950786048) 
-[![Rocketseat Badge](https://img.shields.io/badge/-@pedrinholemes-8257e6?style=flat-square&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGRSURBVHgB7ZiBTcMwEEV/mKAjhA1ggzIB3YBsQDeIN4ANygYRE3QEYAJng3aD405xVMs41FES55B40peVNK5/z3fnKsA/0yiQGSIqebCsT1br6b0oihZrIuZYluLssTZsohkw1wzNWXyLefFnHkrWF+sQeaRl3fP2npEbNlfTde6wBrIwpXFiHbMavVIMQ+yQCxeRMRjkgtLyzqdBLnixisZhqWvcWcxJ3p1oHCXmgr9s40zI+OJ+fe3dszSOeU8OuiR+LEqWxvGaum7ySSLGeNhgOi2fGrepD9+kPERdrsxijvWAJWCThsYjc96862WbMXUF8fGLIfmsdmMVzMtzUlBXsdLvbGBOIjVHGkw2eGA9uaj022egBTazd6bEaAltsKmtt61WoglNeBH0OS4VzaQ+GPAYXJ+dai1FUgVtpcTauNbS97fSqVERMcFVrI+ewnDR+lEUyERKkWwj91pogeL/9XRscdCUewy0ECkOAy1EisNAE0FDNtAGXV5fGGjE5Z+BRtjYTq05gXK+afrrfAMkwQ4y3On//AAAAABJRU5ErkJggg==&logoColor=white&link=https://app.rocketseat.com.br/me/pedrinholemes)](https://app.rocketseat.com.br/me/pedrinholemes) 
+[![Discord Badge](https://img.shields.io/badge/-@pedrinho.lemes-7289DA?style=flat-square&logo=Discord&logoColor=white&link=https://discordapp.com/users/700327812950786048)](https://discordapp.com/users/700327812950786048)
+[![Rocketseat Badge](https://img.shields.io/badge/-@pedrinholemes-8257e6?style=flat-square&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGRSURBVHgB7ZiBTcMwEEV/mKAjhA1ggzIB3YBsQDeIN4ANygYRE3QEYAJng3aD405xVMs41FES55B40peVNK5/z3fnKsA/0yiQGSIqebCsT1br6b0oihZrIuZYluLssTZsohkw1wzNWXyLefFnHkrWF+sQeaRl3fP2npEbNlfTde6wBrIwpXFiHbMavVIMQ+yQCxeRMRjkgtLyzqdBLnixisZhqWvcWcxJ3p1oHCXmgr9s40zI+OJ+fe3dszSOeU8OuiR+LEqWxvGaum7ySSLGeNhgOi2fGrepD9+kPERdrsxijvWAJWCThsYjc96862WbMXUF8fGLIfmsdmMVzMtzUlBXsdLvbGBOIjVHGkw2eGA9uaj022egBTazd6bEaAltsKmtt61WoglNeBH0OS4VzaQ+GPAYXJ+dai1FUgVtpcTauNbS97fSqVERMcFVrI+ewnDR+lEUyERKkWwj91pogeL/9XRscdCUewy0ECkOAy1EisNAE0FDNtAGXV5fGGjE5Z+BRtjYTq05gXK+afrrfAMkwQ4y3On//AAAAABJRU5ErkJggg==&logoColor=white&link=https://app.rocketseat.com.br/me/pedrinholemes)](https://app.rocketseat.com.br/me/pedrinholemes)
 
 ## Licença
 

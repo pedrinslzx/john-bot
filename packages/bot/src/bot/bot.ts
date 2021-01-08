@@ -1,5 +1,12 @@
 import chalk from 'chalk'
-import { Client, ClientEvents, Collection, Message } from 'discord.js'
+import {
+  Client,
+  ClientEvents,
+  Collection,
+  ColorResolvable,
+  Message,
+  MessageEmbed
+} from 'discord.js'
 import { connect } from 'mongoose'
 import config from '../config'
 import RegisterFileCommands from './commands'
@@ -62,15 +69,42 @@ class Database {
   constructor(public databaseURL: string) {
     connect(databaseURL, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true
     }).catch(console.error)
   }
+}
+
+class EmbedMessage extends MessageEmbed {
+  constructor(color?: ColorResolvable, timestamp?: number | Date) {
+    super()
+    this.setColor(color || config.color)
+    this.setTimestamp(timestamp || new Date())
+  }
+}
+
+function renderPage(data: {
+  title: string
+  description: string
+  page: Array<{
+    name: string
+    value: string
+    inline: boolean
+  }>
+}): EmbedMessage {
+  const embed = new EmbedMessage()
+  const page = data.page.slice(0, 24)
+  embed.setTitle(data.title)
+  embed.setDescription(data.description)
+  embed.addFields(page)
+  return embed
 }
 
 class Bot {
   public readonly client: Client
   public readonly database: Database
   public readonly config = config
+  public readonly utils = { EmbedMessage, renderPage }
   public readonly token: string
   static commands: Collection<string, SavedCommand> = new Collection<
     string,
@@ -127,4 +161,4 @@ class Bot {
 
 export default Bot
 
-export { Bot, Command, Event, Database }
+export { Bot, Command, Event, Database, EmbedMessage }

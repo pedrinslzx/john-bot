@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { TextChannel } from 'discord.js'
+import { TextChannel, UserResolvable } from 'discord.js'
 import { Event } from '.'
 import GuildConfig from '../../schemas/GuildConfig'
 
@@ -17,6 +17,8 @@ const guildEvents = [
     await GuildConfig.create({
       guildID: guild.id
     })
+    const botUser = guild.member((bot.client.user as UserResolvable))
+    await botUser?.setNickname(`${bot.client.user?.username} (${bot.config.prefix})`)
     console.log(
       chalk.bold('[ ', chalk.cyan('guild-add'), ' ]'),
       ' ',

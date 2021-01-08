@@ -5,11 +5,15 @@ import { getInviteBotURL } from '../utils'
 
 class Server {
   public app: express.Application
-  private _port: number | string
+  private _port: number
+  private _host: string
 
-  constructor(port?: number | string) {
+  constructor(port?: number, host?: string) {
     this.app = express()
-    this._port = port || process.env.PORT || 3000
+    this._port = Number(
+      port || process.env.DISCORD_BOT_PORT || process.env.PORT || 3002
+    )
+    this._host = String(host || '0.0.0.0')
   }
 
   public start(): void {
@@ -37,7 +41,7 @@ class Server {
   }
 
   private startServer(): void {
-    this.app.listen(this._port, () =>
+    this.app.listen(this._port, this._host, () =>
       console.log(
         chalk.bold('[', chalk.green('server'), ']  '),
         'is running in ',

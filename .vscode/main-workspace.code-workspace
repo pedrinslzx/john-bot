@@ -1,0 +1,30 @@
+{
+  "folders": [
+    {
+      "name": "main",
+      "path": ".."
+    },
+    {
+      "name": "bot",
+      "path": "../packages/bot"
+    },
+    {
+      "name": "web",
+      "path": "../packages/web"
+    },
+    {
+      "name": "api",
+      "path": "../packages/api"
+    }
+  ],
+  "settings": {},
+  "extensions": {
+    "recommendations": [
+      "mikestead.dotenv",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "EditorConfig.EditorConfig",
+      "eamodio.gitlens"
+    ]
+  }
+}
