@@ -1,41 +1,34 @@
 {
-  "name": "@discord-bot/web",
-  "version": "1.0.0",
+  "name": "web",
+  "version": "0.1.0",
   "private": true,
-  "homepage": "https://john-bot.vercel.app",
   "dependencies": {
     "@primer/components": "^22.0.3",
-    "axios": "^0.21.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-is": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "styled-components": "^5.2.1",
-    "swr": "^0.3.11",
-    "web-vitals": "^0.2.4"
-  },
-  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
-    "@types/react-router-dom": "^5.1.7",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
-    "@typescript-eslint/parser": "^4.12.0",
-    "eslint": "^7.17.0",
-    "eslint-plugin-react": "^7.22.0",
-    "serve": "^11.3.2",
-    "typescript": "^4.0.3"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "styled-components": "^5.2.1",
+    "typescript": "^4.0.3",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "prestart": "test -e ./build/ && echo '' || npm run build",
-    "start": "serve -s ./build -l 3000",
-    "dev": "react-scripts start --port=$DISCORD_WEB_PORT",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [

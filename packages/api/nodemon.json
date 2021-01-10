@@ -3,5 +3,6 @@
   "execMap": {
     "ts": "sucrase-node"
   },
-  "watch": ["src/**/*.ts", ".env"]
+  "watch": ["src/**/*.ts", ".env"],
+  "ext": "*"
 }

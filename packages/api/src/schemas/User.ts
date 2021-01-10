@@ -23,6 +23,10 @@ const UserSchema = new Schema(
     guilds: {
       type: Array,
       required
+    },
+    refreshToken: {
+      type: String,
+      required
     }
   },
   {

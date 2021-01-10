@@ -4,7 +4,7 @@
   "description": "Um bot de utilidades para servidores no Discord",
   "private": true,
   "scripts": {
-    "lint": "eslint --fix .",
+    "lint": "lint-staged",
     "start": "npm-run-all -p start:*",
     "start:api": "yarn workspace @discord-bot/api start",
     "start:bot": "yarn workspace @discord-bot/bot start",

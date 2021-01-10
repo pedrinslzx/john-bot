@@ -9,7 +9,7 @@ export default class Routes {
 
     routes.use('/auth', auth.router)
     routes.use('/guild', guild.router)
-    routes.use('/u', user.router)
+    routes.use('/user', user.router)
 
     return routes
   }
