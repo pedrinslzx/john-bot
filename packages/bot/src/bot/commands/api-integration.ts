@@ -13,7 +13,7 @@ import {
 export const ClashRoyaleCommand = new Command(
   'clash-royale',
   'Veja suas estatísticas no **Clash Royale**',
-  ['cr', 'game-cr'],
+  ['cr'],
   async (bot, message, args) => {
     if (typeof args[0] !== 'string') {
       return message.reply(
@@ -64,13 +64,14 @@ export const ClashRoyaleCommand = new Command(
         `<@!${message.author.id}>, deu erro, naõ sei oque aconteceu, entre em contato com o time de suporte que eles vao te falar oque fazer`
       )
     }
-  }
+  },
+  { type: 'games', acceptDM: true }
 )
 
 export const ClashRoyaleLocationCommand = new Command(
   'clash-royale-location',
   'Veja quais são os rankings disponíveis no **Clash Royale**',
-  ['cr-location', 'game-cr-location', 'cr-l', 'game-cr-l'],
+  ['cr-location', 'cr-l'],
   async (bot, message, args) => {
     const mainMessage = await message.reply(
       'tô buscando os dados, pera um pouco'
@@ -178,6 +179,7 @@ export const ClashRoyaleLocationCommand = new Command(
         clashRoyaleAPICached.locations = data.items.reduce((obj, location) => {
           obj[location.id] = location
           return obj
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }, {} as any)
         const pages = splitArray(
           data.items.filter(rank => rank.isCountry),
@@ -250,5 +252,6 @@ export const ClashRoyaleLocationCommand = new Command(
         `<@!${message.author.id}>, deu erro, não sei oque aconteceu, entre em contato com o time de suporte que eles vao te falar oque fazer`
       )
     }
-  }
+  },
+  { type: 'games', acceptDM: true }
 )

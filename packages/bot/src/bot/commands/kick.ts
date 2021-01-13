@@ -6,15 +6,15 @@ const KickCommand = new Command(
   'kick',
   'Dá kick no usuario mencionado',
   [],
-  async (bot, message, args) => {
-    const author = message.guild.member(message.author)
-    const me = message.guild.member(bot.client.user)
+  async (bot, message, _args) => {
+    const author = message.guild?.member(message.author)
+    const me = message?.guild?.member(bot.client?.user || '')
 
-    if (author.permissions.has(['KICK_MEMBERS'])) {
-      if (me.permissions.has(['KICK_MEMBERS'])) {
+    if (author?.permissions.has(['KICK_MEMBERS'])) {
+      if (me?.permissions.has(['KICK_MEMBERS'])) {
         const user = message.mentions.users.first()
         if (user) {
-          const member = message.guild.member(user)
+          const member = message.guild?.member(user)
           if (member) {
             member
               .kick(
@@ -50,7 +50,8 @@ const KickCommand = new Command(
     } else {
       message.reply('eu sei que tu não pode fazer isso :)')
     }
-  }
+  },
+  { type: 'moderation', permissions: 'KICK_MEMBERS', acceptDM: false }
 )
 
 export default KickCommand

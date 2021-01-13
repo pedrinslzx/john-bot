@@ -3,6 +3,5 @@
     "js": "sucrase-node",
     "ts": "sucrase-node"
   },
-  "$schema": "https://json.schemastore.org/nodemon",
-  "watch": ["**/*.ts", "**/*.js", "**/*.env", "**/*.*", "*"]
+  "$schema": "https://json.schemastore.org/nodemon"
 }

@@ -13,14 +13,14 @@ const GuildSchema = new Schema(
       require: true,
       default: config.prefix
     },
-    defaultRole: {
-      type: SchemaTypes.String,
-      require: false
-    },
-    memberLogChannel: {
-      type: SchemaTypes.String,
-      require: false
-    },
+    // defaultRole: {
+    //   type: SchemaTypes.String,
+    //   require: false
+    // },
+    // memberLogChannel: {
+    //   type: SchemaTypes.String,
+    //   require: false
+    // },
     ideaChannel: {
       type: SchemaTypes.String,
       require: false
@@ -31,11 +31,11 @@ const GuildSchema = new Schema(
   }
 )
 
-interface GuildModel extends Document {
+export interface GuildModel extends Document {
   guildID: string
   prefix: string
-  defaultRole?: string
-  memberLogChannel?: string
+  // defaultRole?: string
+  // memberLogChannel?: string
   ideaChannel?: string
 }
 

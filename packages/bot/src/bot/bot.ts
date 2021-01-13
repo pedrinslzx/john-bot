@@ -5,12 +5,18 @@ import {
   Collection,
   ColorResolvable,
   Message,
-  MessageEmbed
+  MessageEmbed,
+  PermissionResolvable,
+  StreamDispatcher,
+  VoiceConnection
 } from 'discord.js'
 import { connect } from 'mongoose'
+import { VideoSearchResult } from 'yt-search'
 import config from '../config'
 import RegisterFileCommands from './commands'
 import RegisterFileEvents from './events'
+
+// #region code
 
 class Command {
   constructor(
@@ -21,7 +27,12 @@ class Command {
       client: Bot,
       message: Message,
       args: string[]
-    ) => Promise<void | any> | void | any
+    ) => Promise<void | unknown> | void | unknown,
+    public config: {
+      type: 'moderation' | 'games' | 'stats' | 'music' | 'bot'
+      permissions?: PermissionResolvable
+      acceptDM?: boolean
+    }
   ) {
     Bot.commands.set(name, {
       ...this,
@@ -37,7 +48,7 @@ class Command {
         })
       }
     })
-    console.log(
+    console.info(
       chalk.bold('[', chalk.green('new-command'), ']  '),
       name,
       chalk.grey(` call: ${name} ${aliases.join(' ')}`)
@@ -55,9 +66,9 @@ class Event<K extends keyof ClientEvents> {
   constructor(public name: K, public handler: EventHandler<K>) {
     Bot.events.set(name, {
       name,
-      handler: handler
+      handler
     })
-    console.log(chalk.bold('[', chalk.green('new-event'), ']  '), name)
+    console.info(chalk.bold('[', chalk.green('new-event'), ']  '), name)
   }
 }
 
@@ -100,10 +111,20 @@ function renderPage(data: {
   return embed
 }
 
+// #endregion
+
+interface Queue {
+  connection: VoiceConnection
+  songs: VideoSearchResult[]
+  volume: number
+  dispatcher: StreamDispatcher
+  clear?: number
+}
 class Bot {
   public readonly client: Client
   public readonly database: Database
   public readonly config = config
+  public readonly queues = new Map<string, Queue | null>()
   public readonly utils = { EmbedMessage, renderPage }
   public readonly token: string
   static commands: Collection<string, SavedCommand> = new Collection<
@@ -111,6 +132,7 @@ class Bot {
     SavedCommand
   >()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static events: Collection<string, Event<any>> = new Collection<
     string,
     Event<keyof ClientEvents>
@@ -134,11 +156,13 @@ class Bot {
     return Bot.commands
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public get events(): Collection<string, Event<any>> {
     return Bot.events
   }
 
-  private registerEvents() {
+  private async registerEvents() {
+    await RegisterFileEvents()
     this.events.map(event => {
       try {
         this.client.addListener(event.name, (...args) =>
@@ -152,8 +176,7 @@ class Bot {
   }
 
   public async start(): Promise<void> {
-    await RegisterFileEvents()
-    this.registerEvents()
+    await this.registerEvents()
     await RegisterFileCommands()
     this.client.login(this.token)
   }
@@ -161,4 +184,4 @@ class Bot {
 
 export default Bot
 
-export { Bot, Command, Event, Database, EmbedMessage }
+export { Bot, Command, Event, Database, EmbedMessage, Queue }

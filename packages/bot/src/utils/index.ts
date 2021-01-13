@@ -1,3 +1,5 @@
+import { GuildMember, PermissionResolvable } from 'discord.js'
+
 interface EmptyObject {
   [key: string]: string | number | EmptyObject
 }
@@ -45,7 +47,7 @@ export function getInviteBotURL(
 export function splitArray<T = any>(array: T[], max: number): T[][] {
   const initialValue: { pages: T[][]; i: number } = { pages: [], i: -1 }
 
-  const data = array.reduce((prev, curr, i) => {
+  const data = array.reduce((prev, curr) => {
     if (prev.pages[prev.i]?.length < max) prev.pages[prev.i].push(curr)
     else {
       prev.i = prev.i + 1
@@ -55,4 +57,30 @@ export function splitArray<T = any>(array: T[], max: number): T[][] {
   }, initialValue)
 
   return data.pages
+}
+
+export function checkPermission(
+  user: GuildMember | null,
+  permission: PermissionResolvable
+): boolean {
+  return (user && user.permissions && user.permissions.has(permission)) || false
+}
+
+export function formatSeconds(seconds: number | string): string {
+  seconds = Number(seconds)
+  const second = seconds % 60
+  const minutes = seconds / 60
+  const minute = minutes % 60
+  const hour = minutes / 60
+
+  let string = ''
+  if (hour >= 1) string += `${Math.floor(hour)}:`
+
+  if (minute >= 1) string += `${Math.floor(hour)}:`
+  else string += '0:'
+
+  if (second < 10) string += `0${second}`
+  else string += `${second}`
+
+  return string
 }

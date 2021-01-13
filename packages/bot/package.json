@@ -2,14 +2,15 @@
   "name": "@discord-bot/bot",
   "version": "1.0.0",
   "main": "out/index.js",
+  "license": "MPL-2.0",
+  "description": "Um bot de utilidades para servidores no Discord",
+  "private": true,
   "scripts": {
-    "start": "node ./out/index.js",
     "dev": "nodemon ./src/index.ts",
     "start": "sucrase-node ./src/index.ts",
     "build": "sucrase ./src -d ./out --transforms typescript,imports"
   },
   "author": "Pedro Henrique <pedroca21265@gmail.com>",
-  "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
     "axios": "^0.21.1",
@@ -18,15 +19,20 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
     "mongoose": "^5.11.9",
     "morgan": "^1.10.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yt-search": "^2.5.1",
+    "ytdl-core-discord": "^1.2.5"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
     "@types/mongoose": "^5.10.3",
     "@types/morgan": "^1.9.2",
     "@types/node": "^14.14.19",
+    "@types/yt-search": "^2.3.0",
     "lint-staged": ">=10",
     "nodemon": "^2.0.6",
     "prettier": "^2.2.1",
