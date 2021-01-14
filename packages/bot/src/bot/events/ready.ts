@@ -72,9 +72,6 @@ const ready = [
           process.env.DISCORD_CLIENT_ID &&
           getInviteBotURL(process.env.DISCORD_CLIENT_ID)
       })
-      if (bot.config.devLogs && bot.config.tag === 'development') {
-        console.info(status[i % status.length])
-      }
       i++
     }, 5000)
     await bot.client.user?.setStatus(tags[bot.config.tag] || 'idle')

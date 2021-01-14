@@ -2,7 +2,9 @@
   "name": "@discord-bot/api",
   "version": "1.0.0",
   "main": "out/server.js",
-  "license": "MIT",
+  "license": "MPL-2.0",
+  "description": "Um bot de utilidades para servidores no Discord",
+  "private": true,
   "scripts": {
     "start": "sucrase-node ./src/server.ts",
     "dev": "nodemon ./src/server.ts",

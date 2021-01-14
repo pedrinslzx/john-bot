@@ -4,5 +4,6 @@
     "ts": "sucrase-node"
   },
   "watch": ["src/**/*.ts", ".env"],
+  "ignoreRoot": ["node_modules"],
   "ext": "*"
 }

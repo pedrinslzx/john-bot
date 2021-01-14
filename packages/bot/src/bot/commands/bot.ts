@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js'
 import { Command } from '.'
+import config from '../../config'
 import { checkPermission } from '../../utils'
 
 export const PingCommand = new Command(
@@ -14,7 +15,13 @@ export const PingCommand = new Command(
       }ms.**\nLatência da API: **${Math.round(bot.client.ws.ping)}ms**`
     )
   },
-  { type: 'bot', acceptDM: true }
+  { type: 'bot', acceptDM: true },
+  {
+    usage: [
+      'Você pode ver meu ping com esse comando',
+      `Você pode mandar uma o \`${config.prefix}ping\` ou só ping se estiver na DM`
+    ]
+  }
 )
 
 export const HelpCommand = new Command(
@@ -29,41 +36,47 @@ export const HelpCommand = new Command(
         const cmd = bot.commands.get(args[0])
         let err = false
         if (cmd) {
-          if (
-            cmd.config &&
-            cmd.config.permissions &&
-            !checkPermission(message.member, cmd.config.permissions)
-          ) {
-            err = true
-            msg.setTitle('Error **404**')
-            msg.setDescription('Este comando não existe :(')
-            msg.addField('Tente', `\`${bot.config.prefix}help\``, true)
-            msg.setColor(0xe74c3c)
-          }
-          if (
-            cmd.config &&
-            !cmd.config.acceptDM &&
-            message.channel.type === 'dm'
-          ) {
-            err = true
-            msg.setTitle('Error **404**')
-            msg.setDescription('Este comando não existe :(')
-            msg.addField('Tente', `\`${bot.config.prefix}help\``, true)
-            msg.setColor(0xe74c3c)
-          }
-          const aliases = [`\`${bot.config.prefix}${cmd?.name}\``]
-          if (
-            cmd.aliases.length &&
-            cmd.aliases.length > 0 &&
-            cmd.aliases[0] !== ''
-          ) {
-            cmd.aliases.forEach(alias =>
-              aliases.push(`\`${bot.config.prefix}${alias}\``)
+          if (cmd.config) {
+            console.log(
+              !cmd.config.acceptDM && message.channel.type === 'dm',
+              cmd.config.permissions &&
+                message.member &&
+                !checkPermission(message.member, cmd.config.permissions),
+              cmd.config.show && !cmd.config.show
             )
+            if (
+              (!cmd.config.acceptDM && message.channel.type === 'dm') ||
+              (cmd.config.permissions &&
+                message.member &&
+                !checkPermission(message.member, cmd.config.permissions)) ||
+              (cmd.config.show && !cmd.config.show)
+            ) {
+              err = true
+              msg.setTitle('Error **404**')
+              msg.setDescription('Este comando não existe :(')
+              msg.addField('Tente', `\`${bot.config.prefix}help\``, true)
+              msg.setColor(0xe74c3c)
+            }
           }
           if (!err) {
+            const aliases = [`\`${bot.config.prefix}${cmd?.name}\``]
+            if (
+              cmd.aliases.length &&
+              cmd.aliases.length > 0 &&
+              cmd.aliases[0] !== ''
+            ) {
+              cmd.aliases.forEach(alias =>
+                aliases.push(`\`${bot.config.prefix}${alias}\``)
+              )
+            }
             msg.setTitle(`Commando ${cmd.name}`)
             msg.setDescription(cmd.description)
+            msg.addField(
+              'Usage',
+              cmd.help.usage instanceof Array
+                ? cmd.help.usage.join('\n')
+                : cmd.help.usage
+            )
             msg.addField('Aliases', aliases.join(' ou '))
           }
         }
@@ -78,18 +91,13 @@ export const HelpCommand = new Command(
       msg.addFields(
         bot.commands
           .filter(command => !command.isAlias)
-          .filter(command =>
-            command.config && command.config.permissions
-              ? checkPermission(message.member, command.config.permissions)
-              : true
-          )
           .filter(
-            command =>
-              !(
-                command.config &&
-                !command.config.acceptDM &&
-                message.channel.type === 'dm'
-              )
+            cmd =>
+              cmd.config &&
+              ((!cmd.config.acceptDM && message.channel.type === 'dm') ||
+                (cmd.config.permissions &&
+                  !checkPermission(message.member, cmd.config.permissions)) ||
+                !cmd.config.show)
           )
           .map(command => {
             const value = [`\`${bot.config.prefix}${command.name}\``]
@@ -113,5 +121,13 @@ export const HelpCommand = new Command(
     msg.setTimestamp(new Date())
     message.channel.send(msg)
   },
-  { type: 'bot', acceptDM: true }
+  { type: 'bot', acceptDM: true },
+  {
+    usage: [
+      'Você pode ver todos os comando disponíveis para o seu usuário ou canal/servidor que o comando foi invocado.',
+      `Você pode mandar uma o \`${config.prefix}help\` para ver todos os comandos.`,
+      `Ou você pode mandar \`${config.prefix}help {comando}\` para saber mais sobre o comando.`,
+      `Se você estiver na DM, pode enviar só o comando, como:  ao invés de \`${config.prefix}help\`, pode ser só \`help\`.`
+    ]
+  }
 )

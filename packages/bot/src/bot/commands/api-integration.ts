@@ -1,5 +1,6 @@
 import { Message, MessageReaction, User } from 'discord.js'
 import { Command } from '.'
+import config from '../../config'
 import { splitArray } from '../../utils'
 import { clashRoyaleAPI, clashRoyaleAPICached } from '../../utils/api'
 import {
@@ -65,7 +66,14 @@ export const ClashRoyaleCommand = new Command(
       )
     }
   },
-  { type: 'games', acceptDM: true }
+  { type: 'games', acceptDM: true },
+  {
+    usage: [
+      'Veja suas estatísticas no game. Veja sua arena, quantidade de batalhas, quantas você ganhou, quantas você perdeu.',
+      `Para isso digite \`${config.prefix}cr {sua tag}\`, ou se estiver na DM \`cr {sua tag}\``,
+      '\n\n**Obs.: Como os dados vem de uma API externa, latência alta ou demora do bot a enviar ois dados é normal**'
+    ]
+  }
 )
 
 export const ClashRoyaleLocationCommand = new Command(
@@ -253,5 +261,13 @@ export const ClashRoyaleLocationCommand = new Command(
       )
     }
   },
-  { type: 'games', acceptDM: true }
+  { type: 'games', acceptDM: true },
+  {
+    usage: [
+      'Veja quem são os 48 melhores em cada ranking do game.',
+      `**Como ver todos os rankings:** Para isso digite \`${config.prefix}cr-l\`, ou se estiver na DM \`cr-l\`, assim o bot enviara uma mensagem com todos os rankings disponíveis, com seu id e nome.`,
+      `**Como ver um ranking especifico:** Para isso digite \`${config.prefix}cr-l {id do ranking}\`, ou se estiver na DM \`cr-l {id do ranking}\`, assim o bot enviara uma mensagem com todos os 48 melhores players do game para aquele ranking.`,
+      '\n\n**Obs.: Como os dados vem de uma API externa, latência alta ou demora do bot a enviar ois dados é normal**'
+    ]
+  }
 )

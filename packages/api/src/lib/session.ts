@@ -11,6 +11,8 @@ export async function encryptSession(session: Session): Promise<string> {
 }
 
 export async function getSession(req: Request): Promise<Session> {
-  const token = getTokenCookie(req)
+  let token = ''
+  if (req.headers.authorization) token = req.headers.authorization
+  else token = getTokenCookie(req)
   return token && (await Iron.unseal(token, TOKEN_SECRET, Iron.defaults))
 }

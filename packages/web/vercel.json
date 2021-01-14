@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:match*", "destination": "http://localhost:3333/:match*" }
+  ],
+  "trailingSlash": true
+}

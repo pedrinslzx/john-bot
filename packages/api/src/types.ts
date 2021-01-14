@@ -43,14 +43,17 @@ export interface DiscordOAuth_TokenRequestResult {
   refresh_token: string
   scope: string
 }
-export interface User extends DiscordOAuth_User {
-  guilds: DiscordOAuth_Guild[]
-  token: DiscordOAuth_TokenRequestResult
-  inDB: Model<UserType & Document>
-}
 
 export type Session = Pick<
   DiscordOAuth_TokenRequestResult,
-  'refresh_token' | 'expires_in'
+  'refresh_token' | 'expires_in' | 'access_token'
 > &
   Pick<DiscordOAuth_User, 'id'>
+export interface User extends DiscordOAuth_User {
+  guilds: {
+    noAdm: DiscordOAuth_Guild[]
+    isAdm: DiscordOAuth_Guild[]
+  }
+  token: Session
+  inDB: Model<UserType & Document>
+}

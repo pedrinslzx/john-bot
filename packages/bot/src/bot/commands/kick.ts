@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 import { Command } from '.'
+import config from '../../config'
 
 const KickCommand = new Command(
   'kick',
@@ -18,40 +18,45 @@ const KickCommand = new Command(
           if (member) {
             member
               .kick(
-                `${user.tag} foi kickado por ${message.author.tag} em ${format(
+                `${user.tag} foi expulso por ${message.author.tag} em ${format(
                   new Date(),
                   'PP às pp',
                   {
-                    locale: ptBR
+                    locale: bot.config.locale
                   }
                 )}`
               )
               .then(() => {
                 message.reply(
-                  `acertei em cheio ${user.tag}, deve ter ido longe :)`
+                  `acertei em cheio o ${user.tag}, deve ter ido longe :)`
                 )
               })
               .catch(err => {
                 message.reply(
-                  'não deu certo meu chute, que que eu tente novamente só manda'
+                  'não deu certo, que que eu tente novamente só manda'
                 )
-                // eslint-disable-next-line no-console
                 console.error(err)
               })
           } else {
-            message.reply('ele não ta no server :(')
+            return message.reply('ele não ta no server :(')
           }
         } else {
-          message.reply('você tem que mencionar um `user` né ADM')
+          return message.reply('você tem que mencionar um `user` né ADM')
         }
       } else {
-        message.reply('eu não posso fazer isso :(')
+        return message.reply('eu não posso fazer isso :(')
       }
     } else {
-      message.reply('eu sei que tu não pode fazer isso :)')
+      return message.reply('eu sei que tu não pode fazer isso :)')
     }
   },
-  { type: 'moderation', permissions: 'KICK_MEMBERS', acceptDM: false }
+  { type: 'moderation', permissions: 'KICK_MEMBERS', acceptDM: false },
+  {
+    usage: [
+      'Utilize este comando para dar um **kick** mais rápido',
+      `Para isso digite \`${config.prefix}kick {menção ao usuário a ser expulso}\`, depois disto o bot enviara uma mensagem confirmando se foi possível expulsar o usuário`
+    ]
+  }
 )
 
 export default KickCommand

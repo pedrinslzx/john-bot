@@ -38,5 +38,8 @@ interface GuildModel extends Document {
   member_log_channel?: string
   idea_channel?: string
 }
+const Guild = model<GuildModel>('Guild', GuildSchema)
 
-export default model<GuildModel>('Guild', GuildSchema)
+export { GuildModel, Guild }
+
+export default Guild

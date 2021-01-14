@@ -14,7 +14,7 @@ export interface Config {
 }
 
 const config: Config = {
-  devLogs: false,
+  devLogs: true,
   tag: (process.env.APP_MODE as Config['tag']) || 'development',
   color: process.env.DISCORD_COLOR || '#33658A',
   prefix: process.env.DISCORD_PREFIX || '!',

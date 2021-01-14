@@ -3,12 +3,16 @@ import { authenticate } from '../lib/auth'
 import { setTokenCookie } from '../lib/cookie'
 import { oauthClient, scope } from '../lib/discord'
 import { encryptSession } from '../lib/session'
+import User from '../schemas/User'
+import { getUserDiscordTag } from '../utils'
 class DiscordController {
   public router = Router()
   constructor() {
     this.router.get('/', this.index)
     this.router.get('/user', authenticate, this.user)
+    // this.router.get('/redirect', (req, res) => res.json(req.query))
     this.router.get('/redirect', this.login)
+    this.router.get('/redirect/code', this.login)
   }
 
   private async index(req: Request, res: Response): Promise<Response | void> {
@@ -28,16 +32,43 @@ class DiscordController {
           code: String(req.query.code)
         })
         const user = await oauthClient.getUser(token.access_token)
+        const guilds = await oauthClient.getUserGuilds(token.access_token)
+
+        let dbUser = await User.findOneAndUpdate(
+          { discordID: user.id },
+          {
+            discordTag: getUserDiscordTag(user),
+            avatar: user.avatar,
+            guilds,
+            accessToken: token.access_token,
+            refreshToken: token.refresh_token
+          },
+          { new: true }
+        )
+
+        if (!dbUser) {
+          dbUser = await User.create({
+            discordID: user.id,
+            discordTag: getUserDiscordTag(user),
+            avatar: user.avatar,
+            guilds,
+            accessToken: token.access_token,
+            refreshToken: token.refresh_token
+          })
+        }
 
         const sessionToken = await encryptSession({
           id: user.id,
           expires_in: token.expires_in,
-          refresh_token: token.refresh_token
+          refresh_token: token.refresh_token,
+          access_token: token.access_token
         })
 
         setTokenCookie(res, sessionToken)
         res.json({
-          user
+          sessionToken,
+          user,
+          dbUser
         })
       } catch (error) {
         console.error(error)
@@ -50,7 +81,7 @@ class DiscordController {
   }
 
   private async user(req: Request, res: Response): Promise<Response | void> {
-    res.json({ ...req.user, token: undefined })
+    res.json({ ...req.user })
   }
 }
 

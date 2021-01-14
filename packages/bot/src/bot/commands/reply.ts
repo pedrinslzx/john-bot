@@ -1,4 +1,5 @@
 import { Command } from '.'
+import config from '../../config'
 
 const ReplyCommand = new Command(
   'reply',
@@ -30,6 +31,13 @@ const ReplyCommand = new Command(
         reply: message
       })
     }
+  },
+  { type: 'games', acceptDM: true },
+  {
+    usage: [
+      'Minha amiga **Bola 8** me ensinou alguns truques, se você quiser pode perguntar e irei te responder',
+      `Para isso digite: \`${config.prefix}reply {sua pergunta}\`, ou se você estiver na DM \`reply {sua pergunta}\``
+    ]
   }
 )
 

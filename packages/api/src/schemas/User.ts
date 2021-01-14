@@ -27,6 +27,10 @@ const UserSchema = new Schema(
     refreshToken: {
       type: String,
       required
+    },
+    accessToken: {
+      type: String,
+      required
     }
   },
   {
@@ -35,5 +39,7 @@ const UserSchema = new Schema(
 )
 
 type UserModel = UserType & Document
+const User = model<UserModel>('User', UserSchema)
 
-export default model<UserModel>('User', UserSchema)
+export { User }
+export default User

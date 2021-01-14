@@ -12,10 +12,7 @@ export default async function RegisterFileCommands(): Promise<void> {
           readFileSync(join(__dirname, path))
           return await import('./' + path)
         } catch (e) {
-          if (e.code === 'EISDIR') {
-            return new Promise(resolve => resolve(null))
-          }
-          return new Promise(resolve => resolve(null))
+          return null
         }
       })
   )

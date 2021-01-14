@@ -18,6 +18,8 @@ import RegisterFileEvents from './events'
 
 // #region code
 
+type CommandTypes = 'moderation' | 'games' | 'server' | 'music' | 'bot'
+
 class Command {
   constructor(
     public name: string,
@@ -29,11 +31,22 @@ class Command {
       args: string[]
     ) => Promise<void | unknown> | void | unknown,
     public config: {
-      type: 'moderation' | 'games' | 'stats' | 'music' | 'bot'
+      type: CommandTypes
       permissions?: PermissionResolvable
       acceptDM?: boolean
+      show?: boolean
+    },
+    public help: {
+      usage: string | string[]
     }
   ) {
+    if (help.usage === '' || help.usage === [] || help.usage.includes('')) {
+      const error = new Error(
+        'A propriedade `usage` não pode ser ou conter valores vazios'
+      )
+      console.error(error)
+      throw error
+    }
     Bot.commands.set(name, {
       ...this,
       isAlias: false

@@ -5,10 +5,11 @@ const message = [
   new Event('message', async (bot, message) => {
     const botMentionText = `<@!${bot.client.user?.id}> `
     const content = message.content.toLowerCase()
+    const prefix = bot.config.prefix.toLowerCase()
     if (message.author.bot) return
     if (
       message.channel.type !== 'dm' &&
-      !content.startsWith(bot.config.prefix.toLowerCase()) &&
+      !content.startsWith(prefix) &&
       !content.startsWith(botMentionText)
     ) {
       return
@@ -19,11 +20,7 @@ const message = [
       const [cmd, ...args] = message.content.split(/ +/)
 
       let commandLike = content
-        .split(
-          content.startsWith(botMentionText)
-            ? botMentionText
-            : bot.config.prefix.toLowerCase()
-        )[1]
+        .split(content.startsWith(botMentionText) ? botMentionText : prefix)[1]
         ?.trim()
         ?.split(/ +/)[0]
       if (content.startsWith(botMentionText)) {
@@ -32,7 +29,7 @@ const message = [
       if (
         message.channel.type === 'dm' &&
         !content.startsWith(botMentionText) &&
-        !content.startsWith(bot.config.prefix.toLowerCase())
+        !content.startsWith(prefix)
       ) {
         commandLike = cmd.toLowerCase()
       }

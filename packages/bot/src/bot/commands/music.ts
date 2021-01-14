@@ -2,6 +2,7 @@ import { Message } from 'discord.js'
 import search, { VideoSearchResult } from 'yt-search'
 import download from 'ytdl-core-discord'
 import { Command } from '.'
+import config from '../../config'
 import { formatSeconds } from '../../utils'
 import Bot from '../bot'
 
@@ -87,7 +88,13 @@ export const PlayCommand = new Command(
       )
     }
   },
-  { type: 'music', acceptDM: false }
+  { type: 'music', acceptDM: false },
+  {
+    usage: [
+      'Eu posso tocar musicas do YouTube',
+      `Para isso digite: \`${config.prefix}play {nome da musica}\``
+    ]
+  }
 )
 
 export const QueueCommand = new Command(
@@ -120,5 +127,11 @@ export const QueueCommand = new Command(
       )
     }
   },
-  { type: 'music', acceptDM: false }
+  { type: 'music', acceptDM: false },
+  {
+    usage: [
+      'Veja as musicas que serão tocadas nesse servidor',
+      `Para isso digite: \`${config.prefix}queue\``
+    ]
+  }
 )
