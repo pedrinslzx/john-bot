@@ -181,7 +181,7 @@ Entre em nosso servidor de suporte: [&nbsp;John Bot Server&nbsp;](https://discor
 
 ## Autor
 
-<img src="https://github.com/pedrinholemes.png" style="border-radius: 50%; width: 150px"/><br>
+<img src="https://github.com/pedrinholemes.png" style="border-radius: 50%" width="150" /><br>
 <b>Pedro Henrique Lemes<a href="https://pedrinholemes.vercel.app/" title="Meu Website">🚀</a></b>
 
 [![Twitter]](https://twitter.com/pedrinho_lemes)&nbsp;[![Gmail]](mailto:pedroca21265@gmail.com)&nbsp;[![Instagram]](https://www.instagram.com/pedrinho.lemes/)<br>[![Discord]](https://discordapp.com/users/700327812950786048)&nbsp;[![Rocketseat]](https://app.rocketseat.com.br/me/pedrinholemes)
