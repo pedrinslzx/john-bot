@@ -17,8 +17,8 @@ const guildEvents = [
     await GuildConfig.create({
       guildID: guild.id
     })
-    const botUser = guild.member((bot.client.user as UserResolvable))
-    await botUser?.setNickname(`${bot.client.user?.username} (${bot.config.prefix})`)
+    const botUser = guild.member(bot.user as UserResolvable)
+    await botUser?.setNickname(`${bot.user?.username} (${bot.config.prefix})`)
     console.log(
       chalk.bold('[ ', chalk.cyan('guild-add'), ' ]'),
       ' ',

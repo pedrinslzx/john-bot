@@ -12,7 +12,7 @@ export const PingCommand = new Command(
     m.edit(
       `🏓 **| Pong!**\nLatência do Server: **${
         m.createdTimestamp - message.createdTimestamp
-      }ms.**\nLatência da API: **${Math.round(bot.client.ws.ping)}ms**`
+      }ms.**\nLatência da API: **${Math.round(bot.ws.ping)}ms**`
     )
   },
   { type: 'bot', acceptDM: true },

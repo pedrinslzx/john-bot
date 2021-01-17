@@ -26,24 +26,24 @@ const ready = [
         ['WATCHING', `${bot.config.prefix}help`],
         [
           'LISTENING',
-          `${bot.client.channels.cache.size} ${getPlural(
-            bot.client.channels.cache.size,
+          `${bot.channels.cache.size} ${getPlural(
+            bot.channels.cache.size,
             'canais',
             'canal'
           )}`
         ],
         [
           'LISTENING',
-          `${bot.client.users.cache.size} ${getPlural(
-            bot.client.users.cache.size,
+          `${bot.users.cache.size} ${getPlural(
+            bot.users.cache.size,
             'usuarios',
             'usuario'
           )}`
         ],
         [
           'LISTENING',
-          `${bot.client.guilds.cache.size} ${getPlural(
-            bot.client.guilds.cache.size,
+          `${bot.guilds.cache.size} ${getPlural(
+            bot.guilds.cache.size,
             'servidores',
             'servidor'
           )}`
@@ -65,7 +65,7 @@ const ready = [
           })
         ]
       ]
-      await bot.client.user?.setActivity({
+      await bot.user?.setActivity({
         name: status[i % status.length][1],
         type: status[i % status.length][0],
         url:
@@ -74,7 +74,12 @@ const ready = [
       })
       i++
     }, 5000)
-    await bot.client.user?.setStatus(tags[bot.config.tag] || 'idle')
+    await bot.user?.setStatus(tags[bot.config.tag] || 'idle')
+    if (bot.voice && bot.voice.connections) {
+      await Promise.all([
+        ...bot.voice.connections.map(async voice => voice.disconnect())
+      ])
+    }
   })
 ]
 

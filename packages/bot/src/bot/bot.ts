@@ -21,6 +21,7 @@ import RegisterFileEvents from './events'
 type CommandTypes = 'moderation' | 'games' | 'server' | 'music' | 'bot'
 
 class Command {
+  public readonly cooldown = new Map<string, Date>()
   constructor(
     public name: string,
     public description: string,
@@ -35,6 +36,7 @@ class Command {
       permissions?: PermissionResolvable
       acceptDM?: boolean
       show?: boolean
+      cooldown?: number
     },
     public help: {
       usage: string | string[]
@@ -130,14 +132,13 @@ interface Queue {
   connection: VoiceConnection
   songs: VideoSearchResult[]
   volume: number
-  dispatcher: StreamDispatcher
+  dispatcher: StreamDispatcher | null
   clear?: number
 }
-class Bot {
-  public readonly client: Client
+class Bot extends Client {
   public readonly database: Database
   public readonly config = config
-  public readonly queues = new Map<string, Queue | null>()
+  public readonly queues = new Map<string, Queue>()
   public readonly utils = { EmbedMessage, renderPage }
   public readonly token: string
   static commands: Collection<string, SavedCommand> = new Collection<
@@ -152,15 +153,15 @@ class Bot {
   >()
 
   constructor(token: string) {
+    super({})
     if (!token || token === '') throw new Error('Token is invalid')
     this.token = token
-    this.client = new Client()
     this.database = new Database('mongodb://localhost:27017/discord-bot')
-    this.client.on('ready', () =>
+    this.on('ready', () =>
       console.log(
         chalk.bold('[', chalk.green('bot'), ']  '),
         'logged in as ',
-        chalk.bold(this.client.user?.tag)
+        chalk.bold(this.user?.tag)
       )
     )
   }
@@ -178,9 +179,7 @@ class Bot {
     await RegisterFileEvents()
     this.events.map(event => {
       try {
-        this.client.addListener(event.name, (...args) =>
-          event.handler(this, ...args)
-        )
+        this.addListener(event.name, (...args) => event.handler(this, ...args))
         return true
       } catch (e) {
         return false
@@ -191,7 +190,7 @@ class Bot {
   public async start(): Promise<void> {
     await this.registerEvents()
     await RegisterFileCommands()
-    this.client.login(this.token)
+    this.login(this.token)
   }
 }
 

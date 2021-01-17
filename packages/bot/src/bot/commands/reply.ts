@@ -32,7 +32,7 @@ const ReplyCommand = new Command(
       })
     }
   },
-  { type: 'games', acceptDM: true },
+  { type: 'games', acceptDM: true, cooldown: 5 },
   {
     usage: [
       'Minha amiga **Bola 8** me ensinou alguns truques, se você quiser pode perguntar e irei te responder',

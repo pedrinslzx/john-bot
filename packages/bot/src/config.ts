@@ -22,7 +22,7 @@ const config: Config = {
   startTime: new Date(),
   locale: ptBR,
   accept: {
-    news: false
+    news: true
   }
 }
 

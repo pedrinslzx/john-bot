@@ -1,9 +1,22 @@
+import { differenceInSeconds } from 'date-fns'
+import { User } from 'discord.js'
 import { Event } from '.'
 import { checkPermission } from '../../utils'
+import { Command } from '../bot'
 
-const message = [
+function cooldown(command: Command, user: User) {
+  command.cooldown.set(user.id, new Date())
+  if (command.config.cooldown) {
+    return setTimeout(
+      () => command.cooldown.delete(user.id),
+      command.config.cooldown * 1000
+    )
+  }
+}
+
+const message: Event<'message'>[] = [
   new Event('message', async (bot, message) => {
-    const botMentionText = `<@!${bot.client.user?.id}> `
+    const botMentionText = `<@!${bot.user?.id}> `
     const content = message.content.toLowerCase()
     const prefix = bot.config.prefix.toLowerCase()
     if (message.author.bot) return
@@ -47,7 +60,7 @@ const message = [
             ) {
               return
             }
-            if (command?.config?.permissions) {
+            if (command.config.permissions) {
               if (
                 !checkPermission(message.member, command.config.permissions)
               ) {
@@ -56,6 +69,21 @@ const message = [
                 )
                 return
               }
+            }
+          }
+          const userCooldown = command.cooldown.get(message.author.id)
+          if (userCooldown) {
+            const curr = new Date()
+            const diff = differenceInSeconds(curr, userCooldown)
+            const time = command.config.cooldown || 0
+            return message.reply(
+              `faltam ${
+                time - diff
+              } segundos para que você possa utilizar o comando \`${commandLike}\`.`
+            )
+          } else {
+            if (command.config.cooldown) {
+              cooldown(command, message.author)
             }
           }
           command.run(bot, message, args)

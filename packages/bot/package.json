@@ -25,6 +25,7 @@
     "morgan": "^1.10.0",
     "uuid": "^8.3.2",
     "yt-search": "^2.5.1",
+    "ytdl-core": "^4.4.3",
     "ytdl-core-discord": "^1.2.5"
   },
   "devDependencies": {

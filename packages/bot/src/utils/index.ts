@@ -74,13 +74,33 @@ export function formatSeconds(seconds: number | string): string {
   const hour = minutes / 60
 
   let string = ''
-  if (hour >= 1) string += `${Math.floor(hour)}:`
+  if (hour >= 1) string += `${Math.ceil(hour)}:`
 
-  if (minute >= 1) string += `${Math.floor(hour)}:`
+  if (minute >= 1) string += `${Math.ceil(hour)}:`
   else string += '0:'
 
   if (second < 10) string += `0${second}`
   else string += `${second}`
 
-  return string
+  return string.split('.')[0]
+}
+export function isYouTubeURL(url: string): boolean {
+  const regex = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.be)\/.+$/gi
+  return regex.test(url)
+}
+export function getYouTubeID(url: string): string | undefined {
+  if (!isYouTubeURL(url)) return url
+  const urlParsed = new URL(url)
+  if (urlParsed.pathname === '/watch') {
+    const id = urlParsed.searchParams.get('v')
+    if (id) return id
+    else return undefined
+  } else if (urlParsed.host === 'youtu.be') {
+    if (urlParsed.pathname.startsWith('/')) {
+      return urlParsed.pathname.slice(1)
+    } else {
+      return urlParsed.pathname
+    }
+  }
+  return undefined
 }

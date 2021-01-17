@@ -23,14 +23,14 @@ const IdeiaCommand = new Command(
     } else {
       let canal: TextChannel | undefined
       if (message.channel.type === 'dm') {
-        canal = bot.client.channels?.cache.find(
+        canal = bot.channels?.cache.find(
           ch => ch.id === '797243355071250472'
         ) as TextChannel
       } else {
         const suggestChannel = message.guild?.channels.cache.find(ch =>
-          /(sugest(ao|oes|ão|ões|s|)|ideias|suggest(s|))+/.test(ch.name)
+          /(sugest(ao|oes|ão|ões|)|ideias|suggest(s|))+/.test(ch.name)
         )
-        canal = bot.client.channels?.cache.find(
+        canal = bot.channels?.cache.find(
           ch => ch.id === suggestChannel?.id
         ) as TextChannel
       }
