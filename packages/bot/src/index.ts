@@ -1,7 +1,8 @@
 import axios from 'axios'
 import 'dotenv/config'
 import './bot'
-import './server'
+
+// import './server'
 
 // =====================================
 

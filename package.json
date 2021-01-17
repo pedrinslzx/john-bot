@@ -7,6 +7,7 @@
   "scripts": {
     "lint": "lint-staged",
     "start": "npm-run-all -p start:*",
+    "heroku": "npm-run-all -p start:api start:bot",
     "start:api": "yarn workspace @discord-bot/api start",
     "start:bot": "yarn workspace @discord-bot/bot start",
     "start:web": "yarn workspace @discord-bot/web start"
@@ -20,6 +21,8 @@
     "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "cz-conventional-changelog": "3.3.0",
@@ -34,21 +37,17 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "pre-commit": "lint-staged"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
-    "*.((j|t)s|json|md|yml)": [
+    "*.((j|t)s(x|)|json|md(x|)|y(a|)ml)": [
       "prettier -w"
     ],
-    "*.(j|t)s": [
+    "*.(j|t)s(x|)": [
       "eslint --fix"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
