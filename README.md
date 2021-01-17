@@ -11,7 +11,7 @@
   	<a href="https://github.com/pedrinholemes/john-bot"><img alt="GitHub license" src="https://img.shields.io/github/license/pedrinholemes/john-bot?style=flat-square"></a>&nbsp;
   	<a href="#suporte"><img alt="Support Server" src="https://img.shields.io/badge/dynamic/json?label=Support&query=$.name&url=https%3A%2F%2Fdiscord.com%2Fapi%2Fguilds%2F793638053729533972%2Fwidget.json&style=flat-square&logo=discord&logoColor=white"></a>&nbsp;
     <a href="https://john-bot.pedrinholemes.repl.co"><img alt="Uptime Robot ratio (7 days)" src="https://img.shields.io/uptimerobot/ratio/7/m786506436-9fd0e0b245bdc136b88a0a29?style=flat-square"></a>
-    <a href="#como-contribuir-para-o-projeto"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen Friendly"/></a>
+    <a href="#como-contribuir-para-o-projeto"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen?style=flat-square" alt="Commitizen Friendly"/></a>
   </div>
   <p align="center">Um bot de utilidades para seu servidor no Discord </p>
 </div>
