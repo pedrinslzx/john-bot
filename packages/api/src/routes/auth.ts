@@ -1,19 +1,23 @@
 import { Request, Response, Router } from 'express'
-
-class AuthController {
+import { authenticate } from '../lib/auth'
+import discord from './discord'
+class DiscordController {
   public router = Router()
   constructor() {
-    this.router.get('/', this.index)
-    this.router.post('/', this.create)
+    this.router.use('/discord', discord.router)
+    this.router.get('/', authenticate, this.index)
   }
 
-  public async index(req: Request, res: Response): Promise<Response | void> {
-    res.json({})
-  }
-
-  public async create(req: Request, res: Response): Promise<Response | void> {
-    res.json({})
+  private async index(req: Request, res: Response): Promise<Response | void> {
+    console.log(!!req.user)
+    if (req.user) {
+      res.json({ user: req.user })
+    } else {
+      res.status(401).json({
+        message: 'Not Authorized'
+      })
+    }
   }
 }
 
-export default new AuthController()
+export default new DiscordController()

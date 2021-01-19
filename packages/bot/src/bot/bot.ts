@@ -1,11 +1,27 @@
 import chalk from 'chalk'
-import { Client, ClientEvents, Collection, Message } from 'discord.js'
+import {
+  Client,
+  ClientEvents,
+  Collection,
+  ColorResolvable,
+  Message,
+  MessageEmbed,
+  PermissionResolvable,
+  StreamDispatcher,
+  VoiceConnection
+} from 'discord.js'
 import { connect } from 'mongoose'
+import { VideoSearchResult } from 'yt-search'
 import config from '../config'
 import RegisterFileCommands from './commands'
 import RegisterFileEvents from './events'
 
+// #region code
+
+type CommandTypes = 'moderation' | 'games' | 'server' | 'music' | 'bot'
+
 class Command {
+  public readonly cooldown = new Map<string, Date>()
   constructor(
     public name: string,
     public description: string,
@@ -14,8 +30,25 @@ class Command {
       client: Bot,
       message: Message,
       args: string[]
-    ) => Promise<void | any> | void | any
+    ) => Promise<void | unknown> | void | unknown,
+    public config: {
+      type: CommandTypes
+      permissions?: PermissionResolvable
+      acceptDM?: boolean
+      show?: boolean
+      cooldown?: number
+    },
+    public help: {
+      usage: string | string[]
+    }
   ) {
+    if (help.usage === '' || help.usage === [] || help.usage.includes('')) {
+      const error = new Error(
+        'A propriedade `usage` não pode ser ou conter valores vazios'
+      )
+      console.error(error)
+      throw error
+    }
     Bot.commands.set(name, {
       ...this,
       isAlias: false
@@ -30,7 +63,7 @@ class Command {
         })
       }
     })
-    console.log(
+    console.info(
       chalk.bold('[', chalk.green('new-command'), ']  '),
       name,
       chalk.grey(` call: ${name} ${aliases.join(' ')}`)
@@ -48,9 +81,9 @@ class Event<K extends keyof ClientEvents> {
   constructor(public name: K, public handler: EventHandler<K>) {
     Bot.events.set(name, {
       name,
-      handler: handler
+      handler
     })
-    console.log(chalk.bold('[', chalk.green('new-event'), ']  '), name)
+    console.info(chalk.bold('[', chalk.green('new-event'), ']  '), name)
   }
 }
 
@@ -62,36 +95,73 @@ class Database {
   constructor(public databaseURL: string) {
     connect(databaseURL, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useCreateIndex: true
     }).catch(console.error)
   }
 }
 
-class Bot {
-  public readonly client: Client
+class EmbedMessage extends MessageEmbed {
+  constructor(color?: ColorResolvable, timestamp?: number | Date) {
+    super()
+    this.setColor(color || config.color)
+    this.setTimestamp(timestamp || new Date())
+  }
+}
+
+function renderPage(data: {
+  title: string
+  description: string
+  page: Array<{
+    name: string
+    value: string
+    inline: boolean
+  }>
+}): EmbedMessage {
+  const embed = new EmbedMessage()
+  const page = data.page.slice(0, 24)
+  embed.setTitle(data.title)
+  embed.setDescription(data.description)
+  embed.addFields(page)
+  return embed
+}
+
+// #endregion
+
+interface Queue {
+  connection: VoiceConnection
+  songs: VideoSearchResult[]
+  volume: number
+  dispatcher: StreamDispatcher | null
+  clear?: number
+}
+class Bot extends Client {
   public readonly database: Database
   public readonly config = config
+  public readonly queues = new Map<string, Queue>()
+  public readonly utils = { EmbedMessage, renderPage }
   public readonly token: string
   static commands: Collection<string, SavedCommand> = new Collection<
     string,
     SavedCommand
   >()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static events: Collection<string, Event<any>> = new Collection<
     string,
     Event<keyof ClientEvents>
   >()
 
   constructor(token: string) {
+    super({})
     if (!token || token === '') throw new Error('Token is invalid')
     this.token = token
-    this.client = new Client()
     this.database = new Database('mongodb://localhost:27017/discord-bot')
-    this.client.on('ready', () =>
+    this.on('ready', () =>
       console.log(
         chalk.bold('[', chalk.green('bot'), ']  '),
         'logged in as ',
-        chalk.bold(this.client.user?.tag)
+        chalk.bold(this.user?.tag)
       )
     )
   }
@@ -100,16 +170,16 @@ class Bot {
     return Bot.commands
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public get events(): Collection<string, Event<any>> {
     return Bot.events
   }
 
-  private registerEvents() {
+  private async registerEvents() {
+    await RegisterFileEvents()
     this.events.map(event => {
       try {
-        this.client.addListener(event.name, (...args) =>
-          event.handler(this, ...args)
-        )
+        this.addListener(event.name, (...args) => event.handler(this, ...args))
         return true
       } catch (e) {
         return false
@@ -118,13 +188,12 @@ class Bot {
   }
 
   public async start(): Promise<void> {
-    await RegisterFileEvents()
-    this.registerEvents()
+    await this.registerEvents()
     await RegisterFileCommands()
-    this.client.login(this.token)
+    this.login(this.token)
   }
 }
 
 export default Bot
 
-export { Bot, Command, Event, Database }
+export { Bot, Command, Event, Database, EmbedMessage, Queue }

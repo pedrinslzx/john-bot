@@ -8,3 +8,4 @@ install:
 script:
   - yarn workspace @discord-bot/bot build
   - yarn workspace @discord-bot/api build
+

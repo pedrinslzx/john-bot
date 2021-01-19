@@ -1,44 +1,46 @@
 {
   "name": "discord-bot",
   "version": "1.0.0",
+  "license": "MPL-2.0",
   "description": "Um bot de utilidades para servidores no Discord",
   "private": true,
   "scripts": {
-    "lint": "eslint --fix ."
+    "lint": "lint-staged",
+    "start": "npm-run-all -p start:api start:bot",
+    "start-all": "npm-run-all -p start:*",
+    "start:api": "yarn workspace @discord-bot/api start",
+    "start:bot": "yarn workspace @discord-bot/bot start",
+    "start:web": "yarn workspace @discord-bot/web start"
   },
   "workspaces": {
     "packages": [
       "packages/*"
     ]
   },
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0",
-    "husky": ">=4",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.0",
-    "eslint-plugin-promise": "^4.2.1"
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "pre-commit": "lint-staged"
-    }
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": ">=4"
   },
   "lint-staged": {
-    "*.(j|t)s": [
-      "prettier -w",
+    "*.((j|t)s(x|)|json|md(x|)|y(a|)ml)": [
+      "prettier -w"
+    ],
+    "*.(j|t)s(x|)": [
       "eslint --fix"
     ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }

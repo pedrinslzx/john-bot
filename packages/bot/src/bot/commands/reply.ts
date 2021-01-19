@@ -1,8 +1,9 @@
 import { Command } from '.'
+import config from '../../config'
 
 const ReplyCommand = new Command(
   'reply',
-  'Posso reponse qualquer duvida',
+  'Posso responde qualquer duvida',
   ['r', 'responda'],
   async (bot, message, args) => {
     const content = args.join(' ')
@@ -21,11 +22,22 @@ const ReplyCommand = new Command(
     if (content.length < 0) {
       return await message.reply('escreva a pergunta após o comando')
     } else if (content.length > 1000) {
-      return await message.reply('nao posso ler mais que 1000 caractetes.')
+      return await message.reply('nao posso ler mais que 1000 caracteres.')
     } else {
       const res = Math.floor(Math.random() * respostas.length)
-      await message.reply(respostas[res])
+      console.log(message.reference)
+      await message.reply({
+        content: respostas[res],
+        reply: message
+      })
     }
+  },
+  { type: 'games', acceptDM: true, cooldown: 5 },
+  {
+    usage: [
+      'Minha amiga **Bola 8** me ensinou alguns truques, se você quiser pode perguntar e irei te responder',
+      `Para isso digite: \`${config.prefix}reply {sua pergunta}\`, ou se você estiver na DM \`reply {sua pergunta}\``
+    ]
   }
 )
 

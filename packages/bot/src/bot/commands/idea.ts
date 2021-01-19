@@ -1,40 +1,59 @@
-import Discord from 'discord.js'
+import { Message, TextChannel } from 'discord.js'
 import { Command } from '.'
+import config from '../../config'
 
 const IdeiaCommand = new Command(
   'ideia',
   'Escreva sua ideia',
-  ['sugest', 'sugestao'],
+  ['suggest', 'sugestao', 'sugestão'],
   async (bot, message, args) => {
-    await message.delete()
+    if (message.channel.type !== 'dm') {
+      await message
+        .delete({
+          reason: `Adicionar a sugestão de ${message.author.tag} ao canal de sugestões do servidor`
+        })
+        .catch(() => console.error('Error ao apagar a mensagem'))
+    }
     const content = args.join(' ')
 
     if (!args[0]) {
-      return message.channel.send(
-        `${message.author.username}, escreva a sugestão após o comando`
-      )
+      return message.reply('escreva a sugestão após o comando')
     } else if (content.length > 1000) {
-      return message.channel.send(
-        `${message.author.username}, forneça uma sugestão de no máximo 1000 caractetes.`
-      )
+      return message.reply('forneça uma sugestão de no máximo 1000 carácteres.')
     } else {
-      const canal = bot.client.channels?.cache.find(
-        ch => ch.id === '742191895010082850'
-      )
-      const msg = await (canal as any)?.send(
-        new Discord.MessageEmbed()
-          .setColor('#FFFFF1')
+      let canal: TextChannel | undefined
+      if (message.channel.type === 'dm') {
+        canal = bot.channels?.cache.find(
+          ch => ch.id === '797243355071250472'
+        ) as TextChannel
+      } else {
+        const suggestChannel = message.guild?.channels.cache.find(ch =>
+          /(sugest(ao|oes|ão|ões|)|ideias|suggest(s|))+/.test(ch.name)
+        )
+        canal = bot.channels?.cache.find(
+          ch => ch.id === suggestChannel?.id
+        ) as TextChannel
+      }
+      if (!canal) return message.reply('não achei o canal para sugestões')
+      const msg: Message = await canal.send(
+        new bot.utils.EmbedMessage()
+          .setTitle('Sugestão')
           .addField('Autor:', message.author)
           .addField('Conteúdo', content)
           .setFooter('ID do Autor: ' + message.author.id)
-          .setTimestamp()
       )
-      await message.channel.send(
-        `${message.author} a mensagem foi enviada com sucesso!`
-      )
+      for (const emoji of ['✔️', '❎']) await msg.react(emoji)
 
-      await Promise.all(['✔️', '❎'].map(emoji => msg?.react(emoji)))
+      await message.reply('a mensagem foi enviada com sucesso!')
     }
+  },
+  { type: 'server', acceptDM: true, show: true },
+  {
+    usage: [
+      'Você pode enviar uma sugestão para o servidor, ou para o bot',
+      `Você pode mandar uma o \`${config.prefix}ideia {sua ideia para o servidor}\`,`,
+      'Ou você pode mandar `ideia {sua ideia para o bot}` se você estiver na DM.'
+    ]
   }
 )
 

@@ -1,55 +1,71 @@
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { UserResolvable } from 'discord.js'
 import { Command } from '.'
+import config from '../../config'
 
 const KickCommand = new Command(
   'kick',
-  'Dá kick no usuario mencionado',
-  [],
+  'Dá kick no usuário mencionado',
+  ['mod-kick'],
   async (bot, message, args) => {
-    const author = message.guild.member(message.author)
-    const me = message.guild.member(bot.client.user)
+    const author = message.guild?.member(message.author)
+    const me = message?.guild?.member(bot.user as UserResolvable)
 
-    if (author.permissions.has(['KICK_MEMBERS'])) {
-      if (me.permissions.has(['KICK_MEMBERS'])) {
+    if (author?.permissions.has(['KICK_MEMBERS'])) {
+      if (me?.permissions.has(['KICK_MEMBERS'])) {
         const user = message.mentions.users.first()
-        if (user) {
-          const member = message.guild.member(user)
-          if (member) {
-            member
-              .kick(
-                `${user.tag} foi kickado por ${message.author.tag} em ${format(
-                  new Date(),
-                  'PP às pp',
-                  {
-                    locale: ptBR
-                  }
-                )}`
-              )
-              .then(() => {
-                message.reply(
-                  `acertei em cheio ${user.tag}, deve ter ido longe :)`
-                )
-              })
-              .catch(err => {
-                message.reply(
-                  'não deu certo meu chute, que que eu tente novamente só manda'
-                )
-                // eslint-disable-next-line no-console
-                console.error(err)
-              })
-          } else {
-            message.reply('ele não ta no server :(')
+        let member = !user ? null : message.guild?.member(user)
+        if (!user && typeof args[0] === 'string') {
+          const id = args[0]
+          console.log(id)
+          const idUser = message.guild?.member(id)
+          console.log(idUser?.user.tag)
+          if (!idUser) {
+            return message.reply('você tem que por um usuário valido né ADM')
           }
+          member = idUser
         } else {
-          message.reply('você tem que mencionar um `user` né ADM')
+          return message.reply(
+            'você tem que mencionar um usuário valido né ADM'
+          )
+        }
+        const now = new Date()
+        if (member) {
+          await member
+            .kick(
+              `${member.user.tag}(${member.id}) foi expulso por ${
+                message.author.tag
+              } em ${format(now, 'PP', {
+                locale: bot.config.locale
+              })} às ${format(now, 'pp', {
+                locale: bot.config.locale
+              })}`
+            )
+            .catch(err => {
+              message.reply(
+                'não deu certo, que que eu tente novamente só manda'
+              )
+              console.error(err)
+            })
+          message.reply(
+            `acertei em cheio o ${member.user.tag}(${member.id}), deve ter ido longe :)`
+          )
+        } else {
+          return message.reply('ele não ta no server :(')
         }
       } else {
-        message.reply('eu não posso fazer isso :(')
+        return message.reply('eu não posso fazer isso :(')
       }
     } else {
-      message.reply('eu sei que tu não pode fazer isso :)')
+      return message.reply('eu sei que tu não pode fazer isso :)')
     }
+  },
+  { type: 'moderation', permissions: 'KICK_MEMBERS', acceptDM: false },
+  {
+    usage: [
+      'Utilize este comando para dar um **kick** mais rápido',
+      `Para isso digite \`${config.prefix}kick {menção ou id do usuário a ser expulso}\`, depois disto o bot enviara uma mensagem confirmando se foi possível expulsar o usuário`
+    ]
   }
 )
 
