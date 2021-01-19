@@ -1,4 +1,4 @@
-run="yarn install && yarn workspace @discord-bot/bot build && yarn workspace @discord-bot/bot start"
+run="yarn install && yarn start"
 language="nodejs"
 [packager]
 ignoredPaths=["packages",".vscode",".git",".github"]
