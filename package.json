@@ -9,8 +9,7 @@
     "start": "npm-run-all -p start:api start:bot",
     "start-all": "npm-run-all -p start:*",
     "start:api": "yarn workspace @discord-bot/api start",
-    "start:bot": "yarn workspace @discord-bot/bot start",
-    "start:web": "yarn workspace @discord-bot/web start"
+    "start:bot": "yarn workspace @discord-bot/bot start"
   },
   "workspaces": {
     "packages": [
