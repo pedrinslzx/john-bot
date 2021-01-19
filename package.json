@@ -6,8 +6,8 @@
   "private": true,
   "scripts": {
     "lint": "lint-staged",
-    "start": "npm-run-all -p start:*",
-    "heroku": "npm-run-all -p start:api start:bot",
+    "start": "npm-run-all -p start:api start:bot",
+    "start-all": "npm-run-all -p start:*",
     "start:api": "yarn workspace @discord-bot/api start",
     "start:bot": "yarn workspace @discord-bot/bot start",
     "start:web": "yarn workspace @discord-bot/web start"
@@ -34,13 +34,6 @@
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-promise": "^4.2.1",
     "husky": ">=4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "lint-staged": {
     "*.((j|t)s(x|)|json|md(x|)|y(a|)ml)": [

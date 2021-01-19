@@ -32,13 +32,26 @@ export default class App {
   }
 
   private database(): void {
+    const { env } = process
+    console.log(Object.keys(env).filter(key => key.match(/$MONGODB_/)))
+    const MONGODB_USER = env.MONGODB_USER || 'root'
+    const MONGODB_PASS = env.MONGODB_PASS || 'root'
+    const MONGODB_HOST = env.MONGODB_HOST || 'localhost'
+    const MONGODB_PORT = env.MONGODB_PORT || 27017
+    const MONGODB_NAME = env.MONGODB_NAME || 'discord-bot'
     mongoose
-      .connect('mongodb://localhost:27017/discord-bot', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false
-      })
+      .connect(
+        `mongodb://${MONGODB_USER}:${MONGODB_PASS}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_NAME}?authSource=admin`,
+        {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useCreateIndex: true,
+          useFindAndModify: false,
+          reconnectTries: Number.MAX_VALUE,
+          reconnectInterval: 500,
+          connectTimeoutMS: 10000
+        }
+      )
       .then(() => console.log('Mongoose connection is done'))
       .catch(err =>
         console.error(

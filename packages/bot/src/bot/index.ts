@@ -1,5 +1,5 @@
 import { Bot } from './bot'
 
-const bot = new Bot(process.env.DISCORD_TOKEN || '')
-
-bot.start().catch(console.error)
+new Bot(process.env.DISCORD_BOT_TOKEN || '')
+  .start()
+  .catch(console.error.bind(console))
